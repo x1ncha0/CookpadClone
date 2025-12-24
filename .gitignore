@@ -1,0 +1,34 @@
+# Build / Output
+bin/
+obj/
+out/
+
+# Rider / IDE
+.idea/
+.vscode/
+
+# User-specific
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+
+# EF Migrations
+Migrations/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Secrets / local config
+appsettings.Development.json
+*.local.settings.json
