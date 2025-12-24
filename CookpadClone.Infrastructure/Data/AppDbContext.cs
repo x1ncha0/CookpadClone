@@ -51,7 +51,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<RecipeImage>(entity =>
         {
             entity.HasKey(x => x.Id);
-            entity.Property(x => x.Url).IsRequired();
+            entity.Property(x => x.ImageUrl).IsRequired();
 
             entity.HasOne(x => x.Recipe)
                 .WithMany(r => r.Images)
