@@ -1,8 +1,14 @@
+using CookpadClone.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using CookpadClone.Domain.Entities;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
@@ -34,6 +40,21 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+app.MapPost("/recipes", async (AppDbContext db) =>
+{
+    var recipe = new Recipe
+    {
+        Id = Guid.NewGuid(),
+        Title = "Test Recipe",
+        CreatedAt = DateTime.UtcNow
+    };
+
+    db.Recipes.Add(recipe);
+    await db.SaveChangesAsync();
+
+    return Results.Ok(recipe);
+});
 
 app.Run();
 
